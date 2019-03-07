@@ -7,6 +7,10 @@ import EventShow from './views/EventShow.vue'
 Vue.use(Router)
 
 export default new Router({
+  // MODE - HISTORY
+  // enables history mode
+  // uses browser's history.pushstate API to change URL w/o reloading
+  mode: 'history',
   routes: [
     {
       path: '/',
@@ -14,23 +18,37 @@ export default new Router({
       component: EventList
     },
     {
-      path: '/event',
+      path: '/event/:id',
       name: 'event-show',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: EventShow
-      // alias: '/about' // redirecting with aliasing
+      component: EventShow,
+      props: true
+      // ALIASING ------
+      // Note: same component for multiple URL endpoints
+      // ex. alias: '/about'
     },
     {
       path: '/event/create',
       name: 'event-create',
       component: EventCreate
     }
+    // DEFAULT ROUTE TO DISPLAY 404
     // {
-    //   // redirect using named route
+    //   path: '*',
+    //   component: NotFoundComponent
+    // }
+
+    // NAMED ROUTING W/ REDIRECT ------
+    // {
     //   path: '/about',
     //   redirect: { name: 'about' }
+    // },
+
+    // DYNAMIC ROUTING ------
+    // {
+    //   path: '/user/:username',
+    //   name: 'user',
+    //   component: User,
+    //   props: true
     // }
   ]
 })
